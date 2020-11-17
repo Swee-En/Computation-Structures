@@ -23,6 +23,5 @@ module adder (
     v = (a[15] & (b[15] ^ alufn[0]) & !s[15]) | (!a[15] & !(b[15] ^ alufn[0]) & s[15]);
     z = ~|s;
     out = s;
-    
   }
 }
