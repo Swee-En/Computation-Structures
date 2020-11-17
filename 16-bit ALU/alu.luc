@@ -10,6 +10,7 @@ module alu (
   boolean boole;
   shifter shift;
   compare cmp;
+  modulo mdl;
   
   sig z;
   sig v;
@@ -42,6 +43,9 @@ module alu (
     shift.a = a;
     shift.b = b[3:0];
     
+    mdl.a = a;
+    mdl.b = b;
+    
     case(alufn[5:4]) {
       b00: out = add.out;
       b01: out = boole.out;
@@ -49,5 +53,16 @@ module alu (
       b11: out = cmp.out;
       default: out = 16b0;
     }
+    
+    if (alufn == b000010){
+      out = a*b; // fast multiplier hack
+    }
+    
+    if (alufn == b000011) {
+      out = a/b; // division 
+    }
+    
+    if (alufn == b000111) {
+      out = mdl.out;
   }
 }
